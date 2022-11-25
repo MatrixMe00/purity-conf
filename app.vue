@@ -1,14 +1,18 @@
 <template>
-  <NavBar />
+  <NavBar @open-ticket-modal="openTicketModal = true" />
   <main>
     <NuxtPage />
   </main>
   <FootBar />
+
+  <Ticket v-if="openTicketModal" @close-ticket-modal="openTicketModal = false" />
 </template>
 
 <script setup>
-// import './assets/css/main.css'
-import "@fortawesome/fontawesome-free/js/all"
+  // import './assets/css/main.css'
+  import "@fortawesome/fontawesome-free/js/all"
+
+  let openTicketModal = ref(false)
 </script>
 
 <style>
@@ -27,9 +31,8 @@ import "@fortawesome/fontawesome-free/js/all"
   margin: auto;
 }
 
-section:not(.carousel){
-  max-width: 1280px !important;
-  margin-left: auto;
-  margin-right: auto;
+body{
+  background-color: ghostwhite;
+  position: relative;
 }
 </style>

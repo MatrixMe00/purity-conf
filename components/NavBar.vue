@@ -10,7 +10,7 @@
             </h3>
         </div>
         <div class="nav-links md:flex justify-end items-center md:w-full md:justify-between lg:justify-end"
-            :class="[hamClicked ? 'flex-col right-5 absolute top-full bg-inherit w-1/2 space-y-4 p-1':'hidden']"
+            :class="[hamClicked ? 'flex-col right-5 absolute top-full bg-inherit sm:w-2/3 w-4/5 space-y-4 p-1':'hidden']"
         >
             <div class="links lg:mr-6"
                 :class="[hamClicked ? 'flex flex-col w-full':'']"
@@ -29,7 +29,7 @@
             </div>
             <button class="py-2 px-3 border border-white hover:border-blue-500 hover:bg-blue-500 hover:text-white"
                 :class="[hamClicked ? 'w-full':'']"
-                @click="[hamClicked = false]"
+                @click="[hamClicked = false, $emit('open-ticket-modal')]"
             >Get a ticket</button>
         </div>
         <div class="ham md:hidden cursor-pointer" @click="hamClicked = !hamClicked">
@@ -59,6 +59,10 @@
     }
 
     const props = defineProps<compProps>()
+
+    onMounted(() => {
+        
+    })
 </script>
 
 <style scoped>

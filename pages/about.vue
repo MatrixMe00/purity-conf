@@ -17,7 +17,7 @@
                     :key="index"
                     :card-data="member"
                     :card="`heroCard`"
-                    class="hover:shadow-lg hover:border-transparent"
+                    class="hover:shadow-lg hover:border-transparent bg-white"
                 />
             </div>
         </div>
@@ -42,13 +42,13 @@
         {
             title: "Team Member", content: "Team Role",
             social: true, socialLinks: {
-                facebook: "fblink", whatsapp: "walink", phone: "279284896"
+                facebook: "fblink", whatsapp: "walink", phone: "279284896", telegram: "tele"
             }
         },
         {
             title: "Team Member", content: "Team Role",
             social: true, socialLinks: {
-                facebook: "fblink", whatsapp: "walink", phone: "279284896"
+                facebook: "fblink", whatsapp: "walink", phone: "279284896", twitter: "twit"
             }
         },
         {
