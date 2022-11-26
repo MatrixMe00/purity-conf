@@ -12,12 +12,12 @@
         <!--The team behind the production-->
         <div class="team py-12 px-8">
             <h1 class="text-center font-bold capitalize text-3xl mb-8">Team Members</h1>
-            <div class="grid justify-center content-center gap-2 md:gap-3 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid justify-center content-center gap-2 md:gap-3 md:grid-cols-2 lg:grid-cols-4">
                 <Card v-for="(member, index) in team"
                     :key="index"
                     :card-data="member"
                     :card="`heroCard`"
-                    class="hover:shadow-lg hover:border-transparent bg-white"
+                    class="hover:shadow-lg hover:border-transparent bg-white ml-0"
                 />
             </div>
         </div>
