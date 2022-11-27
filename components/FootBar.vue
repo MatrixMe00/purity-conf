@@ -18,13 +18,9 @@
 </template>
 
 <script setup lang="ts">
-    let Links = ref([
-        {title:"Home", to:"/"},
-        {title:"About Us", to:"/about"},
-        {title:"Gallery", to:"/gallery"},
-        {title:"Events", to:"/events"},
-        {title:"Sponsor", to:"/sponsor"}
-    ]);
+    import navFoot from '~/mixins/navFoot'
+
+    const Links = navFoot().Links
 </script>
 
 <style>

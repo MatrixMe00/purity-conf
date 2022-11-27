@@ -1,11 +1,11 @@
 <template>
   <NavBar @open-ticket-modal="openTicketModal = true" />
   <main>
-    <NuxtPage />
+    <LazyNuxtPage />
   </main>
   <FootBar />
 
-  <Ticket v-if="openTicketModal" @close-ticket-modal="openTicketModal = false" />
+  <LazyTicket v-if="openTicketModal" @close-ticket-modal="openTicketModal = false" />
 </template>
 
 <script setup>
@@ -16,16 +16,6 @@
 </script>
 
 <style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
-
 .main{
   max-width: 70rem;
   margin: auto;

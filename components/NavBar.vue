@@ -45,24 +45,10 @@
 </template>
 
 <script setup lang="ts">
+    import navFoot from '~/mixins/navFoot'
+
+    const Links = navFoot().Links
     let hamClicked = ref(false);
-    const Links = ref([
-        {title:"Home", to:"/"},
-        {title:"About Us", to:"/about"},
-        {title:"Gallery", to:"/gallery"},
-        {title:"Events", to:"/events"},
-        {title:"Sponsor", to:"/sponsor"}
-    ]);
-
-    interface compProps{
-
-    }
-
-    const props = defineProps<compProps>()
-
-    onMounted(() => {
-        
-    })
 </script>
 
 <style scoped>
