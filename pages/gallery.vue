@@ -7,8 +7,9 @@
         </div>
     </section>
     <section class="xl:container xl:m-auto py-8 px-2 md:px-8">
+        <!-- Tags to group gallery by year and month -->
         <div class="flex items-center justify-center">
-            <div class="flex overflow-x-auto v-mod-scroll">
+            <div class="flex overflow-x-auto h-mod-scroll">
                 <span class="py-2 min-w-max px-3 border cursor-pointer hover:border-blue-400 hover:text-neutral-100"
                     v-for="(item, index) in gallery" :key="index"
                     :class="[currentTab == index ? 'bg-blue-500 hover:bg-blue-500 text-white':'hover:bg-blue-400']"
@@ -16,6 +17,9 @@
                 >{{item.month}} {{item.year}}</span>
             </div>
         </div>
+        <!-- End of tags -->
+
+        <!-- Box to hold results of the current tab -->
         <div class="grid justify-items-stretch p-1 border mt-8">
             <h2 class="py-8 px-6 text-2xl font-semibold text-center">{{galleryHeader}}</h2>
             <div class="grid md:grid-cols-2 md:gap-3">
@@ -25,11 +29,11 @@
                 ]">
                     <img :src="`/_nuxt/assets/img/gallery/${currentBigImg}`" class="w-full h-full object-cover object-center" alt="">
                 </div>
-                <div class="mt-3 md:mt-0 tmbs grid grid-cols-2 md:grid-cols-3 gap-2 md:max-h-[15rem] overflow-y-auto h-mod-scroll">
+                <div class="mt-3 md:mt-0 tmbs grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:max-h-[15rem] overflow-y-auto h-mod-scroll">
                     <div
                         v-for="(image, index) in gallery[currentTab].gallery"
                         :key="index" 
-                        class="border cursor-pointer group hover:bg-black/40"
+                        class="border cursor-pointer group hover:bg-black/40 max-h-28"
                         :class="currentBigImg == image ? 'hidden':''"
                         @click="[changeBigImg(image), currentModalImageNumber = index]"
                     >
@@ -39,10 +43,12 @@
                 </div>
             </div>
         </div>
+        <!-- End of box -->
     </section>
 
     <section class="fixed inset-0 bg-black/80 z-50 flex" v-if="imageModal">
         <div class="h-mod-scroll p-2 container m-auto mx-2 sm:mx-auto bg-white/30 max-h-[90vh] overflow-auto rounded landscape:md:max-h-[85vh] lg:max-w-screen-md">
+            <!-- Modal head -->
             <header class="flex justify-between items-center rounded-t cursor bg-black/60 py-3 px-2">
                 <span class="font-semibold text-white">
                     {{modalHeader}}
@@ -51,7 +57,11 @@
                     <i class="fas fa-xmark"></i>
                 </span>
             </header>
+
+            <!--Modal image-->
             <img :src="`/_nuxt/assets/img/gallery/${modalImage}`" class="w-full h-full" alt="">
+            
+            <!--Modal foot-->
             <div class="py-5 flex justify-between rounded-b items-center bg-black/60 text-white">
                 <span class="left cursor-pointer hover:text-stone-500 min-w-[2rem] mr-2 text-center"
                     @click="prevModalImage(currentGalleryContainer)"
@@ -154,7 +164,6 @@
 </script>
 
 <style scoped>
-
     .main-img:hover::after{
         content: "Full Screen Image";
         position: absolute;
