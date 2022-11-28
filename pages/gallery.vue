@@ -1,11 +1,8 @@
 <template>
-    <section class="xl:container xl:m-auto p-8 pt-28 md:pt-36 lg:pt-28 bg-gradient-to-br
-        from-blue-600 via-[#5f56f5] to-blue-600 text-white
-        flex items-end justify-center">
-        <div class="text-3xl font-bold">
-            <h1>GALLERY</h1>
-        </div>
+    <section>
+        <Banner :title="`GALLERY`" />
     </section>
+    
     <section class="xl:container xl:m-auto py-8 px-2 md:px-8">
         <!-- Tags to group gallery by year and month -->
         <div class="flex items-center justify-center">

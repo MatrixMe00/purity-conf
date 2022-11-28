@@ -1,10 +1,9 @@
 <template>
-    <section class="">
+    <section class="xl:container xl:m-auto">
         <!--Banner and about brief-->
-        <div class="banner text-center space-y-4 bg-gradient-to-br from-blue-600 to-blue-700 flex flex-col justify-end p-8 pt-28 sm:pt-36 lg:pt-48 items-center text-white">
-            <h1 class="text-4xl font-bold">The Purity Conference</h1>
-            <p class="text-lg">Some text about us. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas iste sed officia repellendus ex?</p>
-        </div>
+        <Banner 
+            :title="`ABOUT US`" :banner-content="abtDesc" :content-banner="true"
+        />
 
         <!--About the founder-->
         <IndexAbout :page="`about`" />
@@ -58,4 +57,6 @@
             }
         }
     ])
+
+    const abtDesc = "Some text about us. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas iste sed officia repellendus ex?"
 </script>
