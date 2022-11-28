@@ -18,9 +18,7 @@
 </template>
 
 <script setup lang="ts">
-    import navFoot from '~/mixins/navFoot'
-
-    const Links = navFoot().Links
+    import {Links} from "~/mixins/globalVars"
 </script>
 
 <style>

@@ -7,7 +7,7 @@
             :key="index" 
             :card-data="n"
             :class="[currentSlide != index ? 'hidden':'block']"
-            card="caro-card"
+            :card="CardType.CARO"
          />
         <div class="slots flex absolute bottom-2 w-full justify-center">
             <span class="rounded-full w-4 block h-4 border bg-neutral-300 m-2"
@@ -20,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+    import {CardType} from "~/mixins/globalVars"
+
     const carouselCards = ref([
         {imgUrl: "img1.jpg", title:"Huge Title 1",
             content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate ad exercitationem ex a maxime tenetur reiciendis nobis, laborum recusandae animi ullam quam, fugiat similique, consectetur asperiores iusto atque consequatur reprehenderit?",

@@ -1,5 +1,5 @@
 <template>
-    <div class="card relative h-inherit" v-if="card == 'caro-card'">
+    <div class="card relative h-inherit" v-if="card == CardType.CARO">
         <div class="img bg-cover bg-center flex justify-center h-screen items-center">
             <img 
                 :src="`/_nuxt/assets/img/${cardData.imgUrl}`"
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div v-else-if="card=='heroCard'" class="heroCard max-w-sm md:max-w-md hover:border-zinc-500 md:hover:rounded-t-xl w-full h-fit m-4 
+    <div v-else-if="card==CardType.HERO" class="heroCard max-w-sm md:max-w-md hover:border-zinc-500 md:hover:rounded-t-xl w-full h-fit m-4 
         lg:m-6 rounded-t-2xl rounded-b relative p-2 border"
         :class="[cardData.social ? 'group':'']"
     >
@@ -56,6 +56,8 @@
 </template>
 
 <script setup lang="ts">
+    import {CardType} from "~/mixins/globalVars"
+
     interface Data{
         cardData: {
             imgUrl?: string, 
@@ -74,7 +76,7 @@
                 phone: string
             }
         },
-        card?: string
+        card: CardType
     }
 
     const props = defineProps<Data>()

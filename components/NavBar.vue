@@ -45,9 +45,8 @@
 </template>
 
 <script setup lang="ts">
-    import navFoot from '~/mixins/navFoot'
+    import {Links} from "~/mixins/globalVars"
 
-    const Links = navFoot().Links
     let hamClicked = ref(false);
 </script>
 

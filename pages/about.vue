@@ -15,7 +15,7 @@
                 <Card v-for="(member, index) in team"
                     :key="index"
                     :card-data="member"
-                    card="heroCard"
+                    :card="CardType.HERO"
                     class="hover:shadow-lg hover:border-transparent bg-white ml-0"
                 />
             </div>
@@ -27,6 +27,8 @@
 </template>
 
 <script setup>
+    import {CardType} from "~/mixins/globalVars"
+    
     useHead({
         title: "Purity Conference | About"
     })
