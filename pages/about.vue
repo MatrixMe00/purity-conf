@@ -2,11 +2,11 @@
     <section class="xl:container xl:m-auto">
         <!--Banner and about brief-->
         <Banner 
-            :title="`ABOUT US`" :banner-content="abtDesc" :content-banner="true"
+            title="ABOUT US" :banner-content="abtDesc" content-banner="true"
         />
 
         <!--About the founder-->
-        <IndexAbout :page="`about`" />
+        <IndexAbout page="about" />
 
         <!--The team behind the production-->
         <div class="team py-12 px-8">
@@ -15,7 +15,7 @@
                 <Card v-for="(member, index) in team"
                     :key="index"
                     :card-data="member"
-                    :card="`heroCard`"
+                    card="heroCard"
                     class="hover:shadow-lg hover:border-transparent bg-white ml-0"
                 />
             </div>
@@ -23,7 +23,7 @@
     </section>
 
     <!--Follow us tag-->
-    <Follow :mode="`light`" />
+    <Follow mode="light" />
 </template>
 
 <script setup>

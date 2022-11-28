@@ -1,6 +1,6 @@
 <template>
     <section>
-        <Banner :title="`GALLERY`" />
+        <Banner title="GALLERY" />
     </section>
     
     <section class="xl:container xl:m-auto py-8 px-2 md:px-8">

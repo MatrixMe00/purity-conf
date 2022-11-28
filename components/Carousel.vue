@@ -7,7 +7,7 @@
             :key="index" 
             :card-data="n"
             :class="[currentSlide != index ? 'hidden':'block']"
-            :card="`caro-card`"
+            card="caro-card"
          />
         <div class="slots flex absolute bottom-2 w-full justify-center">
             <span class="rounded-full w-4 block h-4 border bg-neutral-300 m-2"

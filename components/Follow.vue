@@ -95,5 +95,5 @@
         mode: string
     }
 
-    const prop = defineProps<myProps>();
+    const pageProps = defineProps<myProps>();
 </script>

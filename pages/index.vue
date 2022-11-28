@@ -1,6 +1,6 @@
 <template>
     <Carousel />
-    <IndexAbout :page="`home`" />
+    <IndexAbout page="home" />
     <IndexHero />
     <IndexEvents />
     <Follow mode="light" />
