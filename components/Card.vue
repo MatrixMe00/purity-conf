@@ -70,10 +70,17 @@
             <span class="text-sm">{{cardData.content}}</span>
         </div>
         <div class="justify-center absolute top-2 right-2 translate-x-full flex group-hover:translate-x-0">
-            <span class="text-base px-2 py-1 self-start rounded-l bg-red-500 text-white">{{cardData.otherData?.day}}</span>
+            <span class="text-base px-2 py-1 self-start rounded-l"
+                :class="[
+                    cardData.otherData.tag == 'past' ? 'bg-red-600 font-semibold text-white':'',
+                    cardData.otherData.tag == 'coming' ? 'bg-blue-600 font-semibold text-white':'',
+                    cardData.otherData.tag == 'month' ? 'bg-emerald-600 font-semibold text-white':'',
+                    cardData.otherData.tag == 'live' ? 'bg-green-600 font-semibold text-white':''
+                ]"
+            >{{cardData.otherData?.day}}</span>
             <div class="flex flex-col justify-center items-center p-2 rounded rounded-tl-none bg-white/80">
                 <span class="text-xs">{{cardData.otherData?.month}}</span> 
-                <span class="text-base font-semibold">{{cardData.otherData?.year}}</span>
+                <span class="text-base font-bold">{{cardData.otherData?.year}}</span>
             </div>
         </div>
     </div>
