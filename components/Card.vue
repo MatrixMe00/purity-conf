@@ -1,4 +1,5 @@
 <template>
+    <!-- Carousel Cards -->
     <div class="card relative h-inherit" v-if="card == CardType.CARO">
         <div class="img bg-cover bg-center flex justify-center h-screen items-center">
             <img 
@@ -15,12 +16,16 @@
             <div class="cont">
                 <p>{{cardData.content}}</p>
             </div>
-            <div class="btn">
+            <div class="btn" v-if="cardData.btn && cardData.btnText">
+                <button class="border border-blue-500 hover:bg-blue-500 hover:text-white py-2 px-3 cursor-pointer rounded-l-full rounded-r-full">{{cardData.btnText}}</button>
+            </div>
+            <div v-else-if="cardData.btn" class="btn">
                 <button class="border border-blue-500 hover:bg-blue-500 hover:text-white py-2 px-3 cursor-pointer rounded-l-full rounded-r-full">Some Button</button>
             </div>
         </div>
     </div>
 
+    <!-- Hero Cards -->
     <div v-else-if="card==CardType.HERO" class="heroCard max-w-sm md:max-w-md hover:border-zinc-500 md:hover:rounded-t-xl w-full h-fit m-4 
         lg:m-6 rounded-t-2xl rounded-b relative p-2 border"
         :class="[cardData.social ? 'group':'']"
@@ -53,6 +58,25 @@
             </a>
         </div>
     </div>
+
+    <!-- Event cards -->
+    <div v-else-if="card==CardType.EVENT" class="max-w-sm md:max-w-md md:hover:rounded-t-xl w-full h-fit relative border shadow hover:shadow-lg group overflow-hidden"
+    >
+        <img src="~/assets/img/person2.jpg" class="w-full object-cover object-top" alt="">
+        <div class="py-3 flex-col justify-end gap-y-2 p-2 bg-black/70 text-neutral-100 absolute 
+            inset-0 border-2 translate-x-full flex group-hover:rounded-md group-hover:translate-x-0">
+            <span class="text-xs text-neutral-400 font-semibold">{{cardData.otherData?.guest}}</span>
+            <h1 class="block font-semibold text-2xl md:text-3xl">{{cardData.title}}</h1>
+            <span class="text-sm">{{cardData.content}}</span>
+        </div>
+        <div class="justify-center absolute top-2 right-2 translate-x-full flex group-hover:translate-x-0">
+            <span class="text-base px-2 py-1 self-start rounded-l bg-red-500 text-white">{{cardData.otherData?.day}}</span>
+            <div class="flex flex-col justify-center items-center p-2 rounded rounded-tl-none bg-white/80">
+                <span class="text-xs">{{cardData.otherData?.month}}</span> 
+                <span class="text-base font-semibold">{{cardData.otherData?.year}}</span>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -63,10 +87,11 @@
             imgUrl?: string, 
             title: string,
             content: string,
-            btn?: boolean, 
+            btn?: boolean,
+            btnText?: string, 
             btnLink?: boolean, 
             linkUrl?: string,
-            social?: boolean
+            social?: boolean,
             socialLinks?:{
                 facebook: string,
                 twitter?: string,
@@ -74,7 +99,8 @@
                 whatsapp: string,
                 instagram?: string,
                 phone: string
-            }
+            },
+            otherData?: any
         },
         card: CardType
     }

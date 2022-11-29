@@ -1,9 +1,9 @@
 <template>
-    <section>
+    <section class="xl:container xl:mx-auto">
         <Banner title="GALLERY" />
     </section>
     
-    <section class="xl:container xl:m-auto py-8 px-2 md:px-8">
+    <section class="xl:container xl:m-auto py-8 px-2 md:px-8 min-h-[67vh]">
         <!-- Tags to group gallery by year and month -->
         <div class="flex items-center justify-center">
             <div class="flex overflow-x-auto h-mod-scroll">

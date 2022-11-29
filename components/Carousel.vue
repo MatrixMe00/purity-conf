@@ -1,5 +1,5 @@
 <template>
-    <section class="carousel bg-white relative"
+    <section class="carousel bg-white relative xl:container xl:mx-auto"
         @mouseenter="stopTimer"
         @mouseleave="startTimer"
     >

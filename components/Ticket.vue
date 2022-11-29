@@ -153,12 +153,12 @@
             //For Testing only
             messageType.value = MessageType.SUCCESS
             message.value = "Everything is correct"
-            finalTicket.value = form.value.ticketNumber
         */
         showMessage.value = true
         
         if(checkForm()){
             message.value = "You have successfully submitted the form"
+            finalTicket.value = form.value.ticketNumber
         }
 
         clearTimeout(popTimer.value)           //clear any ongoing timer

@@ -1,5 +1,5 @@
 <template>
-    <section class="sm:px-8 py-12">
+    <section class="sm:px-8 py-12 xl:container xl:mx-auto">
         <h1 class="text-center text-4xl font-bold">Events</h1>
         <div class="px-8 py-12 grid landscape:md:grid-cols-2 landscape:md:space-x-4">
             <div class="group relative event-main border w-full h-full" style="min-height: 30vh; max-height: 25.5rem">

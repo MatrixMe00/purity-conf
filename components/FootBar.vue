@@ -1,5 +1,5 @@
 <template>
-    <footer class="text-gray-50 flex flex-col">
+    <footer class="text-gray-50 flex flex-col xl:container xl:mx-auto">
         <div class="btns bg-neutral-800 p-4 flex flex-wrap space-x-1 justify-center">
             <NuxtLink 
                     v-for="(link, index) in Links"
