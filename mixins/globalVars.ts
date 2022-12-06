@@ -1,7 +1,8 @@
 export enum CardType{
     CARO = "caro-card",
     HERO = "heroCard",
-    EVENT = "event-card"
+    EVENT = "event-card",
+    SPONSOR = "sponsor"
 }
 
 export enum FollowMode{

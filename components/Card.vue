@@ -84,16 +84,56 @@
             </div>
         </div>
     </div>
+
+    <!-- A sponsorship card -->
+    <div v-else-if="card==CardType.SPONSOR" class="md:w-auto max-w-screen-sm sm:min-w-[auto] hover:shadow h-fit 
+        rounded-lg relative p-2 border"
+        :class="[cardData.social ? 'group':'']"
+    >
+        <div class="img flex border-b pb-5 pt-3" v-if="cardData.imgUrl"
+            :class="[cardData.otherData?.type == 'agency' ? 'justify-between':'justify-center']"
+        >
+            <img src="~/assets/img/person2.jpg" class="w-32 rounded-full" alt="">
+            <span v-if="cardData.otherData?.type == 'agency'" 
+                class="text-sm text-neutral-600"
+            >{{cardData.otherData?.location}}</span>
+        </div>
+        <div v-else class="text-neutral-700 text-6xl border-b pb-5 pt-3"
+            :class="[cardData.otherData?.type == 'agency' ? 'flex justify-between':'block text-center']"
+        >
+            <i class="fas fa-user-secret"></i>
+            <span v-if="cardData.otherData?.type == 'agency'" 
+                class="text-sm text-neutral-600"
+            >{{cardData.otherData?.location}}
+            </span>
+        </div>
+        <h1 class="text-center pt-5 pb-3 text-xl bg-white">
+            <span class="block font-semibold">{{cardData.title}}</span>
+            <span class="text-xs" v-if="cardData.content">{{cardData.content}}</span>
+        </h1>
+    </div>
 </template>
 
 <script setup lang="ts">
     import {CardType} from "~/mixins/globalVars"
 
     interface Data{
+        /**
+         * This attribute receives the data to be displayed on the card
+         * @prop {string|undefined} imgUrl This receives a string location to the image to be displayed
+         * @prop {string} title This is the title of the card. It usually serves as the main text
+         * @prop {string} content This is a required variable for the object
+         * @prop {boolean|undefined} btn This tells the card if it should have a button or not [works with carosel type]
+         * @prop {string|undefined} btnLink This is option identifies a button as been a link
+         * @prop {string|undefined} linkUrl This is the URL for the button if it is a link
+         * @prop {boolean|undefined} social THis is an optional option which indicates if a card has social links
+         * @prop {object|undefined} socialLinks This holds the individual social links
+         * @prop {any|undefined} otherData This holds any other data to be shown on the card
+        */
         cardData: {
             imgUrl?: string, 
             title: string,
-            content: string,
+            content?: string,
             btn?: boolean,
             btnText?: string, 
             btnLink?: boolean, 
@@ -109,6 +149,10 @@
             },
             otherData?: any
         },
+
+        /**
+         * This variable will be used to get the type of card to deliver
+        */
         card: CardType
     }
 
