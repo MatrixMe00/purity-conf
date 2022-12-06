@@ -1,4 +1,7 @@
 <template>
+  <noscript class="fixed bg-red-500 top-24 md:top-36 lg:top-24 text-white p-4">
+    Sorry, but this page requires javascript enabled to run effectively. All JavaScript required functionality is currently not available.
+  </noscript>
   <NavBar @open-ticket-modal="openTicketModal = true" />
   <main>
     <LazyNuxtPage />
