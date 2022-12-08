@@ -17,7 +17,8 @@ export const Links = ref([
     {title:"About Us", to:"/about"},
     {title:"Gallery", to:"/gallery"},
     {title:"Events", to:"/events"},
-    {title:"Sponsor", to:"/sponsor"}
+    {title:"Sponsor", to:"/sponsor"},
+    {title:"Admin", to:"/admin"}
 ])
 
 export interface monthYear{

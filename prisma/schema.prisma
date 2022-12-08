@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model vue_users {
+  id       Int              @id @default(autoincrement())
+  username String           @db.VarChar(60)
+  password String           @db.VarChar(100)
+  gender   vue_users_gender
+
+  @@map("vue-users")
+}
+
+enum vue_users_gender {
+  Male
+  Female
+
+  @@map("vue-users_gender")
+}
