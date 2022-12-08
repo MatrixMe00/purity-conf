@@ -30,7 +30,7 @@
         lg:m-6 rounded-t-2xl rounded-b relative p-2 border"
         :class="[cardData.social ? 'group':'']"
     >
-        <img src="~/assets/img/person2.jpg" class="w-full rounded-t-xl object-cover object-top" alt="">
+        <img src="/assets/img/person2.jpg" class="w-full rounded-t-xl object-cover object-top" alt="">
         <h1 class="text-center pt-5 pb-3 text-xl bg-white">
             <span class="block font-semibold">{{cardData.title}}</span>
             <span class="text-sm">({{cardData.content}})</span>
@@ -62,7 +62,7 @@
     <!-- Event cards -->
     <div v-else-if="card==CardType.EVENT" class="max-w-sm md:max-w-md md:hover:rounded-t-xl w-full h-fit relative border shadow hover:shadow-lg group overflow-hidden"
     >
-        <img src="~/assets/img/person2.jpg" class="w-full object-cover object-top" alt="">
+        <img src="/assets/img/person2.jpg" class="w-full object-cover object-top" alt="">
         <div class="py-3 flex-col justify-end gap-y-2 p-2 bg-black/70 text-neutral-100 absolute 
             inset-0 border-2 translate-x-full flex group-hover:rounded-md group-hover:translate-x-0">
             <span class="text-xs text-neutral-400 font-semibold">{{cardData.otherData?.guest}}</span>
@@ -93,7 +93,7 @@
         <div class="img flex border-b pb-5 pt-3" v-if="cardData.imgUrl"
             :class="[cardData.otherData?.type == 'agency' ? 'justify-between':'justify-center']"
         >
-            <img src="~/assets/img/person2.jpg" class="w-32 rounded-full" alt="">
+            <img src="/assets/img/person2.jpg" class="w-32 rounded-full" alt="">
             <span v-if="cardData.otherData?.type == 'agency'" 
                 class="text-sm text-neutral-600"
             >{{cardData.otherData?.location}}</span>
@@ -159,7 +159,7 @@
     const props = defineProps<Data>()
 
     // function getImage(imgurl:string){
-    //     var images = require.context('~/assets/', false, /\.jpg|.png$/)
+    //     var images = require.context('~//assets/', false, /\.jpg|.png$/)
     //     return images()
     // }
 </script>
