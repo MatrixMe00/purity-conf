@@ -19,14 +19,14 @@
         <!-- Box to hold results of the current tab -->
         <div class="grid justify-items-stretch p-1 border mt-8">
             <h2 class="py-8 px-6 text-2xl font-semibold text-center">{{galleryHeader}}</h2>
-            <div class="grid md:grid-cols-2 md:gap-3">
+            <div class="grid lg:grid-cols-2 md:gap-3">
                 <div class="main-img h-48 sm:h-52 md:h-60 w-full sticky top-6 z-10" @click="[
                     imageModal=true, modalImage=currentBigImg, 
                     currentGalleryContainer=currentTab
                 ]">
-                    <img :src="`/_nuxt/assets/img/gallery/${currentBigImg}`" class="w-full h-full object-cover object-center" alt="">
+                    <img :src="`assets/img/gallery/${currentBigImg}`" class="w-full h-full object-cover object-center" alt="">
                 </div>
-                <div class="mt-3 md:mt-0 tmbs grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:max-h-[15rem] overflow-y-auto h-mod-scroll">
+                <div class="mt-3 md:mt-0 tmbs grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:max-h-[15rem] overflow-y-auto h-mod-scroll">
                     <div
                         v-for="(image, index) in gallery[currentTab].gallery"
                         :key="index" 
@@ -56,7 +56,7 @@
             </header>
 
             <!--Modal image-->
-            <img :src="`/_nuxt/assets/img/gallery/${modalImage}`" class="w-full h-full" alt="">
+            <img :src="`assets/img/gallery/${modalImage}`" class="w-full h-full" alt="">
             
             <!--Modal foot-->
             <div class="py-5 flex justify-between rounded-b items-center bg-black/60 text-white">

@@ -3,7 +3,7 @@
     <div class="card relative h-inherit" v-if="card == CardType.CARO">
         <div class="img bg-cover bg-center flex justify-center h-screen items-center">
             <img 
-                :src="`/_nuxt/assets/img/${cardData.imgUrl}`"
+                :src="cardData.imgUrl"
                 class="w-full h-full object-cover object-center block" style="max-height: inherit" 
                 alt="some image">
         </div>
@@ -157,6 +157,11 @@
     }
 
     const props = defineProps<Data>()
+
+    // function getImage(imgurl:string){
+    //     var images = require.context('~/assets/', false, /\.jpg|.png$/)
+    //     return images()
+    // }
 </script>
 
 <style scoped>
