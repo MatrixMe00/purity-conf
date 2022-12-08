@@ -3,7 +3,7 @@
         <h1 class="text-center text-4xl font-bold">Events</h1>
         <div class="px-8 py-12 grid landscape:md:grid-cols-2 landscape:md:space-x-4">
             <div class="group relative event-main border w-full h-full" style="min-height: 30vh; max-height: 25.5rem">
-                <img :src="`/_nuxt/assets/img/${currentImgVal.imgUrl}`" class="object-cover object-center w-full h-full" alt="image">
+                <img :src="`/assets/img/${currentImgVal.imgUrl}`" class="object-cover object-center w-full h-full" alt="image">
                 <div class="absolute inset-0 py-5 px-4 hidden flex-col justify-end 
                     items-stretch bg-black/60 group-hover:bg-black/60 space-y-10 sm:space-y-6 text-neutral-100 group-hover:flex">
                     <h1 class="text-center text-xl sm:text-3xl font-bold">{{currentImgVal.title}}</h1>
@@ -28,7 +28,7 @@
                     v-for="(thumb, index) in events"
                     :key="index" 
                     class="tmb w-full h-12 bg-[length:150%] hover:bg-[length:160%] sm:bg-[length:100%] sm:hover:bg-[length:110%] sm:h-24 border bg-center hover:opacity-80 bg-no-repeat hover:bg-blend-darken"
-                    :style="`background-image: url('/_nuxt/assets/img/${thumb.imgUrl}')`"
+                    :style="`background-image: url('/assets/img/${thumb.imgUrl}')`"
                     :class="[currentImgVal.imgUrl == thumb.imgUrl ? 'hidden':'']"
                     @click="currentImg(index)"
                 ></div>

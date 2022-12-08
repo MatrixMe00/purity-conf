@@ -34,7 +34,7 @@
                         :class="currentBigImg == image ? 'hidden':''"
                         @click="[changeBigImg(image), currentModalImageNumber = index]"
                     >
-                        <img :src="`_nuxt/assets/img/gallery/${image}`" 
+                        <img :src="`/assets/img/gallery/${image}`" 
                         class="w-full h-full object-[100% 100%] object-center group-hover:opacity-80" alt="">
                     </div>
                 </div>

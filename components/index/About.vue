@@ -8,7 +8,7 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam maxime necessitatibus molestiae fuga consectetur odio non inventore eaque voluptatibus. Veniam vero nesciunt autem cupiditate. Quia exercitationem impedit nobis alias a.</p>
             </div>
         </div>
-        <div class="right h-72 bg-cover bg-center bg-gray-300 w-full md:w-2/5" style="background-image: url('/_nuxt/assets/img/img1.jpg')"></div>
+        <div class="right h-72 bg-cover bg-center bg-gray-300 w-full md:w-2/5" style="background-image: url('/assets/img/img1.jpg')"></div>
     </section>
 
     <section v-else class="py-12 lg:py-14 px-8 sm:px-10 lg:px-16 bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-50 flex lg:flex-row-reverse flex-wrap
@@ -20,7 +20,7 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam maxime necessitatibus molestiae fuga consectetur odio non inventore eaque voluptatibus. Veniam vero nesciunt autem cupiditate. Quia exercitationem impedit nobis alias a.</p>
             </div>
         </div>
-        <div class="h-72 bg-cover bg-center bg-gray-300 w-full md:w-2/5" style="background-image: url('/_nuxt/assets/img/img1.jpg')"></div>
+        <div class="h-72 bg-cover bg-center bg-gray-300 w-full md:w-2/5" style="background-image: url('/assets/img/img1.jpg')"></div>
     </section>
 </template>
 
