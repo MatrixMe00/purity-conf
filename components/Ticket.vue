@@ -110,6 +110,7 @@
 <script setup lang="ts">
     import {submitForm, resetForm, form, formVars} from "~/mixins/ticketFuncs"
     import {MessageType} from "~/mixins/globalForms"
+    import { detectInternet } from "~~/mixins/globalVars";
 
     //computed variable to track the total price for the tickets bought
     var totalPrice = computed(() => {

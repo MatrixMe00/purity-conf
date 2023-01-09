@@ -18,6 +18,18 @@
         </div>
     </section>
 
+    <section class="max-w-screen-lg mx-auto md:px-6 bg-white">
+        <h1 class="text-lg font-semibold p-4 text-neutral-600">Featured sponsors</h1>
+        <div class="grid sm:grid-cols-2 gap-2 lg:gap-4 lg:grid-cols-3 xl:grid-cols-4 p-2 sm:px-4">
+            <Card 
+                v-for="(card, index) in sponsorBoxComp"
+                :key="index"
+                :card="CardType.SPONSOR"
+                :card-data="card"
+            />
+        </div>
+    </section>
+
     <section class="xl:container xl:mx-auto px-2 sm:px-4 md:px-6 bg-neutral-100 py-10 w-full">
         <form action="" class="bg-white rounded border p-4 max-w-screen-lg mx-auto" @submit.prevent="submitForm()">
             <header class="mb-4" v-if="formComps.messageType != MessageType.SUCCESS">
@@ -158,18 +170,6 @@
         <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max">
             <h1 class="font-bold text-2xl">What are we going to use your money for?</h1>
             <p>Your donations would be used for this, this and that. Some long text to add up in the Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nihil ea, ipsum aut aliquam ipsa sapiente?</p>
-        </div>
-    </section>
-
-    <section class="max-w-screen-lg mx-auto md:px-6 bg-white">
-        <h1 class="text-lg font-semibold p-4 text-neutral-600">Featured sponsors</h1>
-        <div class="grid sm:grid-cols-2 gap-2 lg:gap-4 lg:grid-cols-3 xl:grid-cols-4 p-2 sm:px-4">
-            <Card 
-                v-for="(card, index) in sponsorBoxComp"
-                :key="index"
-                :card="CardType.SPONSOR"
-                :card-data="card"
-            />
         </div>
     </section>
 </template>

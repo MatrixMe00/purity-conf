@@ -9,11 +9,15 @@
     <FootBar />
   
     <LazyTicket v-if="openTicketModal" @close-ticket-modal="openTicketModal = false" />
+    <Connectivity />
   </template>
   
   <script setup>
-    // import './assets/css/main.css'
     import "@fortawesome/fontawesome-free/js/all"
+
+    useHead({
+        script: [{src:"https://js.paystack.co/v1/inline.js"}]
+    })
   
     let openTicketModal = ref(false)
   </script>

@@ -1,4 +1,5 @@
-import {resetForm as formReset, checkPhoneNumber, MessageType} from './globalForms'
+import {resetForm as formReset, checkPhoneNumber, MessageType, payWithPaystack} from './globalForms'
+import { detectInternet } from './globalVars'
 
 export var form = ref({
     fname: '',
@@ -23,7 +24,7 @@ var popTime = 5             //value in seconds used to set the time for a messag
 
 /**
      * This is the submission form for the ticket
-     * This form will submit when all the required fields are filled
+     * This form will submit when all the required fields are filledasync 
     */
  export function submitForm(){
     /*
@@ -33,16 +34,52 @@ var popTime = 5             //value in seconds used to set the time for a messag
     */
     formVars.value.showMessage = true
     
-    if(checkForm()){
-        formVars.value.message = "You have successfully submitted the form"
-        formVars.value.finalTicket = form.value.ticketNumber
+    if(detectInternet()){
+        if(checkForm()){
+            //alert user that payment is ongoing
+            formVars.value.message = "Payment Ongoing, please wait..."
+
+            const makePayment = payWithPaystack(form.value)
+
+            makePayment.then((response) => {
+                formVars.value.message = "You have successfully submitted the form"
+                formVars.value.finalTicket = form.value.ticketNumber
+                formVars.value.messageType = MessageType.SUCCESS
+
+                submitTimeout()
+            }).catch((error) => {
+                formVars.value.message = error["message"]
+                formVars.value.messageType = MessageType.ERROR
+
+                submitTimeout()
+            })
+        }
+    }else{
+        formVars.value.message = "Internet connection is not established. Try again later..."
+        formVars.value.messageType = MessageType.ERROR
+
+        submitTimeout()
     }
+    
+}
 
+/**
+ * This function is responsible for making sure message boxes are properly displayed or hidden
+ * @param {number} time This determines how long a message should be displayed
+ */
+function submitTimeout(time:number = popTime){
     clearTimeout(popTimer.value)           //clear any ongoing timer
-    popTimer.value = setTimeout(()=>{
-        formVars.value.showMessage = false
-    }, (popTime * 1000))
 
+    if(time != popTime){
+        popTime = time
+    }
+    popTimer.value = setTimeout(()=>{
+        console.log("timer finished")
+        formVars.value.showMessage = false
+
+        //reset pop time
+        popTime = 5
+    }, (popTime * 1000))
 }
 
 /** 
@@ -69,7 +106,7 @@ function checkForm() :boolean{
         formVars.value.message = "You can buy at least one ticket"
     }else{
         formState = true
-        formVars.value.messageType = MessageType.SUCCESS
+        formVars.value.messageType = MessageType.NEUTRAL
     }
 
     return formState;

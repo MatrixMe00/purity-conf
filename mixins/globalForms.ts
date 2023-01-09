@@ -62,3 +62,90 @@ export function checkPhoneNumber(phoneNumber:string): boolean{
 
     return found
 }
+
+/**
+ * This function is responsible for converting json element to formdata
+ * @param {any} formData This is the json element to be converted
+ * @return {FormData} returns a formdata object
+ */
+export function jsonToFormData(formData:any): FormData{
+    var form = new FormData;
+
+    for(var key in formData){
+        form.append(key, formData[key]);
+    }
+
+    return form
+}
+
+/**
+ * This is the paystack function to work on money transaction in the system
+ * @param {any} formData This is the data received from the form
+ * 
+ * @return {Promise<any>} Returnsreturns an array of data
+ */
+export async function payWithPaystack(formData:any): Promise<any>{
+    return await new Promise((resolve, reject) => {
+        let final = {
+            error: true,
+            message: "no message"
+        };
+        
+        //for testing purposes
+        let mykey = "pk_test_c5dcd641dd1de34981af774e53ccd56ca8e4f36d";
+        let cust_amount = 100 * formData.price
+        
+        try {
+            var handler = PaystackPop.setup({
+            key: mykey,
+            email: formData.email,
+            amount: cust_amount,
+            currency: "GHS",
+            metadata: {
+                custom_fields: [
+                    {
+                        display_name: "Mobile Number",
+                        variable_name: "mobile_number",
+                        value: formData.phone
+                    },
+                    {
+                        display_name: "Customer's Name",
+                        variable_name: "customer_name",
+                        value: formData.fname + " " + formData.lname
+                    }
+                ]
+            },
+            callback: function(response:any){//parse data into database
+                passPaymentToDatabase(formData, response.reference);
+    
+                final["error"] = false;
+                final["message"] = "Process complete";
+    
+                resolve(final)
+            },
+            onClose:  function(){
+                final["error"] = true;
+                final["message"] = "Transaction has been canceled by user";
+
+                reject(final)
+            }
+            });
+            
+            handler.openIframe();
+        } catch (error) {
+            final["error"] = true;
+            final["message"] = e.toString()
+
+            reject(final)
+        }
+    })
+}
+
+/**
+ * This function is responsible for sending the payment data unto the server
+ * @param {any} user This is the user data to be sent
+ * @param {string} reference This is the reference received from the paystack server
+ */
+function passPaymentToDatabase(user:any, reference:string){
+
+}
