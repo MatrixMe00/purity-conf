@@ -71,16 +71,59 @@ export async function loginUser(userdata: any): Promise<any> {
  */
 export async function makeSession(user_id: number, session_id: string): Promise<any> {
     const authToken = session_id
-    const session = await createSession(user_id, session_id)
+    const session = await createSession(session_id)
 
 }
 
 /**
  * This function is used to create a session for the given user
  * @param {string} session_id ID of the session
+ * @returns {Promise<any>} Promise resolved
  */
 async function createSession(session_id: string){
-    const session = await getSessionByAuthToken(session_id)
+    //const session = await getSessionByAuthToken(session_id)
 
-    return session.user
+    //return session.user
+}
+
+/**
+ * This function is responsible for sending the payment data unto the server
+ * @param {any} user This is the user data to be sent
+ * @param {string} reference This is the reference received from the paystack server
+ * @returns {Promise<any>} Promise resolved
+ */
+export async function passItemToDatabase(user:any, reference:string):Promise<any>{
+    var returnData = null
+    
+    try {
+        let form = jsonToFormData(user)
+        form.append("submit","database-entry")
+
+        if(user.type="sponsor"){
+            
+        }else if(user.type=""){
+
+        }
+
+        const response = $fetch<ISession>('http://localhost/vue-course/auth.php', {
+            method: 'POST',
+            body: form
+        })
+
+        if(response){
+            returnData = JSON.parse(JSON.stringify(response))
+        }else{
+            returnData = {
+                "error": true,
+                "message": "No response found"
+            }
+        }
+    } catch (error) {
+        returnData = error;
+    }
+
+    return await new Promise((resolve, reject) => {
+        
+    })
+    
 }

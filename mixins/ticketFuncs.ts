@@ -7,7 +7,8 @@ export var form = ref({
     email: '',
     phone: '',
     ticketNumber: 1,
-    price: 20
+    price: 20,
+    page: 'ticket'
 })
 
 //variables for the top of the form [caption]

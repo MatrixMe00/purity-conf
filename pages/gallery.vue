@@ -8,7 +8,7 @@
         <div class="flex items-center justify-center">
             <div class="flex overflow-x-auto h-mod-scroll">
                 <span class="py-2 min-w-max px-3 border cursor-pointer hover:border-blue-400 hover:text-neutral-100"
-                    v-for="(item, index) in gallery" :key="index"
+                    v-for="(item, index) in photos" :key="index"
                     :class="[currentTab == index ? 'bg-blue-500 hover:bg-blue-500 text-white':'hover:bg-blue-400']"
                     @click="changeTab(index)"
                 >{{item.month}} {{item.year}}</span>
@@ -24,18 +24,24 @@
                     imageModal=true, modalImage=currentBigImg, 
                     currentGalleryContainer=currentTab
                 ]">
-                    <img :src="`assets/img/gallery/${currentBigImg}`" class="w-full h-full object-cover object-center" alt="">
+                    <img :src="`${baseImageUrl}${currentBigImg}`" class="w-full h-full object-cover object-center" alt="">
                 </div>
+
+                <!-- Small images displaying as thumbs -->
                 <div class="mt-3 md:mt-0 tmbs grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:max-h-[15rem] overflow-y-auto h-mod-scroll">
                     <div
-                        v-for="(image, index) in gallery[currentTab].gallery"
+                        v-for="(image, index) in activeGallery"
                         :key="index" 
                         class="border cursor-pointer group hover:bg-black/40 max-h-28"
                         :class="currentBigImg == image ? 'hidden':''"
                         @click="[changeBigImg(image), currentModalImageNumber = index]"
                     >
-                        <img :src="`/assets/img/gallery/${image}`" 
+                        <img :src="`${baseImageUrl}${image}`" 
                         class="w-full h-full object-[100% 100%] object-center group-hover:opacity-80" alt="">
+                    </div>
+
+                    <div v-if="online" class="col-span-2 sm:col-span-3 lg:col-span-4 flex items-center justify-center">
+                        <button class="rounded border hover:bg-sky-600 bg-sky-500 px-12 py-3 text-white" @click="activeGallery = activeGallery.concat(filterImage(currentTab))">Load More</button>
                     </div>
                 </div>
             </div>
@@ -56,7 +62,7 @@
             </header>
 
             <!--Modal image-->
-            <img :src="`assets/img/gallery/${modalImage}`" class="w-full h-full" alt="">
+            <img :src="`${baseImageUrl}${modalImage}`" class="w-full h-full" alt="">
             
             <!--Modal foot-->
             <div class="py-5 flex justify-between rounded-b items-center bg-black/60 text-white">
@@ -77,37 +83,42 @@
 </template>
 
 <script setup lang="ts">
+    import {gallery, demoPhotos} from "~/composables/photos"
+
     useHead({
         title: "Purity Conference | Gallery"
     })
 
-    const gallery = ref([
-        {
-            title: "Purity Conference", year: 2021, month: "March", location: "Ho",
-            gallery: [
-                "gal1.jpg","gal2.jpg","gal3.jpg","gal4.jpg","gal5.jpg"
-            ]
-        },
-        {
-            title: "Purity Conference", year: 2022, month: "March", location: "Ada",
-            gallery: [
-                "gal2.jpg","gal1.jpg","gal6.jpg","gal3.jpg","gal9.jpg"
-            ]
-        },
-        {
-            title: "Purity Conference", year: 2022, month: "March", location: "Ho",
-            gallery: [
-                "gal3.jpg","gal10.jpg","gal8.jpg","gal7.jpg","gal1.jpg"
-            ]
-        }
-    ])
+    const photos = ref()
+    let baseImageUrl = ref("")
+    const online = ref(true)
+    
+    //gallery to be used
+    const lastGalleryImage = ref(0)
+    const activeGallery = ref()
+
+    if(online.value){
+        //online viewing
+        photos.value = gallery
+
+        activeGallery.value = photos.value[0].gallery.slice(0, 9)
+        lastGalleryImage.value = 9
+    }else{
+        //offline viewing
+        baseImageUrl.value = "assets/img/gallery/"
+        photos.value = demoPhotos
+
+        activeGallery.value = photos.value[0].gallery
+    }
+    
+    
 
     let currentTab = ref(0)
-    let currentBigImg = ref(gallery.value[0].gallery[0])
+    let currentBigImg = ref(photos.value[0].gallery[0])
     const galleryHeader = computed(()=>{
         let index = currentTab.value
 
-        return `${gallery.value[index].title} - ${gallery.value[index].month} ${gallery.value[index].year}, ${gallery.value[index].location}`
+        return `${photos.value[index].title} - ${photos.value[index].month} ${photos.value[index].year}, ${photos.value[index].location}`
     })
     
     //Modal Variables
@@ -120,13 +131,16 @@
     let modalHeader = computed(()=>{
         let index = currentGalleryContainer.value
 
-        return `${gallery.value[index].title} | ${gallery.value[index].month} ${gallery.value[index].year}, ${gallery.value[index].location}`
+        return `${photos.value[index].title} | ${photos.value[index].month} ${photos.value[index].year}, ${photos.value[index].location}`
     })
     
     //functions
     function changeTab(index:number){
         currentTab.value = index
-        currentBigImg.value = gallery.value[index].gallery[0]
+        currentBigImg.value = photos.value[index].gallery[0]
+
+        lastGalleryImage.value = 0
+        activeGallery.value = photos.value[index].gallery.slice(0, 9)
     }
 
     function changeBigImg(image:string){
@@ -141,7 +155,7 @@
         currentModalImageNumber.value = currentModalImageNumber.value == 0 ? (total-1) : currentModalImageNumber.value - 1
 
         //display the current image in the modal view
-        modalImage.value = gallery.value[index].gallery[currentModalImageNumber.value]
+        modalImage.value = photos.value[index].gallery[currentModalImageNumber.value]
     }
 
     function nextModalImage(index:number){
@@ -152,11 +166,26 @@
         currentModalImageNumber.value = currentModalImageNumber.value < (total-1) ? currentModalImageNumber.value + 1 : 0
 
         //display the current image in the modal view
-        modalImage.value = gallery.value[index].gallery[currentModalImageNumber.value]
+        modalImage.value = photos.value[index].gallery[currentModalImageNumber.value]
     }
 
     function getGalleryLength(index:number){
-        return gallery.value[index].gallery.length
+        return photos.value[index].gallery.length
+    }
+
+    function filterImage(index:number){
+        let length = getGalleryLength(index)
+        let newGallery
+        let first = lastGalleryImage.value
+
+        if(length > 8){
+            lastGalleryImage.value += 8
+            newGallery = photos.value[index].gallery.slice(first, lastGalleryImage.value)
+        }else{
+            newGallery = photos.value[index].gallery
+        }
+
+        return newGallery
     }
 </script>
 

@@ -145,6 +145,13 @@
                         leading-tight focus:outline-none focus:shadow-outline" 
                         id="amount" name="amount" type="text" readonly :value="amount">
                 </div>
+                <div class="flex items-center md:col-span-2 lg:col-span-3 xl:col-span-4">
+                    <input class="" 
+                        id="paynow" name="paynow" type="checkbox" v-model="form.paynow">
+                    <label class="inline text-gray-700 ml-1" for="paynow">
+                      Make Payment when I click the submit button
+                    </label>
+                </div>
                 <div class="md:col-span-2 lg:col-span-3 xl:col-span-4 flex flex-wrap md:flex-nowrap gap-2">
                     <button type="submit" class="border hover:border-blue-600 w-full lg:w-44 xl:w-52 rounded py-2 px-4 text-white bg-gradient-to-tr from-blue-700 
                     via-blue-600 to-blue-500 hover:shadow-md">Submit</button>
@@ -157,17 +164,17 @@
         </form>
     </section>
 
-    <section class="container mx-auto items-end p-4 gap-6 md:gap-8 text-lg text-center grid"
+    <section class="container mx-auto items-end lg:justify-center p-4 gap-6 md:gap-8 text-lg text-center grid"
     >
-        <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max">
+        <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max max-w-screen-lg">
             <h1 class="font-bold text-2xl">What is the benefit of Purity Conference?</h1>
             <p>Since its creation in 2021, Purity Conference has done something in the lives of youths and some other text. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id alias esse dolores consequuntur culpa tempore rerum labore similique, in, vero doloribus soluta. Quaerat eius quae tempora alias est error perspiciatis.</p>
         </div>
-        <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max">
+        <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max max-w-screen-lg">
             <h1 class="font-bold text-2xl">Why do we need the money?</h1>
             <p>Without our generous sponsors over the years, Purity Conference would not be able to do something and some other text to follow. lorem ipsum dolor sit amet, consectetur adip. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error odio unde dolor quasi in quam excepturi magni quaerat, modi, accusamus quibusdam rerum alias iusto nobis delectus? Voluptatem voluptate, modi nobis autem assumenda repudiandae mollitia fugit.</p>
         </div>
-        <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max">
+        <div class="space-y-2 bg-white shadow rounded hover:shadow-md p-4 h-max max-w-screen-lg">
             <h1 class="font-bold text-2xl">What are we going to use your money for?</h1>
             <p>Your donations would be used for this, this and that. Some long text to add up in the Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nihil ea, ipsum aut aliquam ipsa sapiente?</p>
         </div>

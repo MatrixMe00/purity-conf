@@ -1,3 +1,4 @@
+import {passItemToDatabase} from "~/composables/userAuth"
 /**
  * This enum holds the values for declaring the types of error messages
  */
@@ -93,7 +94,22 @@ export async function payWithPaystack(formData:any): Promise<any>{
         
         //for testing purposes
         let mykey = "pk_test_c5dcd641dd1de34981af774e53ccd56ca8e4f36d";
-        let cust_amount = 100 * formData.price
+        let cust_amount = 100;
+        let cust_name = ""
+
+        if(formData.fname != "" && formData.lname != ""){
+            cust_name = formData.fname + " " + formData.lname
+        }else if(formData.agency != ""){
+            cust_name = formData.agency
+        }
+
+        switch(formData.page){
+            case "sponsor":
+                cust_amount *= formData.amount
+                break;
+            case "ticekt":
+                cust_amount *= formData.price
+        }
         
         try {
             var handler = PaystackPop.setup({
@@ -111,15 +127,18 @@ export async function payWithPaystack(formData:any): Promise<any>{
                     {
                         display_name: "Customer's Name",
                         variable_name: "customer_name",
-                        value: formData.fname + " " + formData.lname
+                        value: cust_name
                     }
                 ]
             },
             callback: function(response:any){//parse data into database
-                passPaymentToDatabase(formData, response.reference);
-    
-                final["error"] = false;
-                final["message"] = "Process complete";
+                let resp = passItemToDatabase(formData, response.reference);
+                
+                resp.then((response) => {
+                    final["error"] = false;
+                    final["message"] = "Process complete";
+                })
+                
     
                 resolve(final)
             },
@@ -134,18 +153,9 @@ export async function payWithPaystack(formData:any): Promise<any>{
             handler.openIframe();
         } catch (error) {
             final["error"] = true;
-            final["message"] = e.toString()
+            final["message"] = error.toString()
 
             reject(final)
         }
     })
-}
-
-/**
- * This function is responsible for sending the payment data unto the server
- * @param {any} user This is the user data to be sent
- * @param {string} reference This is the reference received from the paystack server
- */
-function passPaymentToDatabase(user:any, reference:string){
-
 }

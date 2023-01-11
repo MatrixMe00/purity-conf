@@ -1,4 +1,5 @@
-import {MessageType, checkPhoneNumber} from "./globalForms"
+import {MessageType, checkPhoneNumber, payWithPaystack} from "./globalForms"
+import { detectInternet } from "./globalVars"
 
 export var form = ref({
     //individual exclusive
@@ -15,6 +16,9 @@ export var form = ref({
     sponsorType: '',
     amount: 0.0,
     sponsor: '',
+
+    paynow: false,
+    page: "sponsor"
 })
 
 //items to show in the form
@@ -46,15 +50,57 @@ var popTime = 5             //value in seconds used to set the time for a messag
     */
     formComps.value.showMessage = true
     
-    if(checkForm()){
-        formComps.value.message = "You have successfully submitted the form"
+    if(detectInternet()){
+        if(checkForm()){
+            if(form.value.paynow){
+                //alert user that payment is ongoing
+                formComps.value.message = "Payment Ongoing, please wait..."
+
+                const makePayment = payWithPaystack(form.value)
+
+                makePayment.then((response) => {
+                    formComps.value.message = "You have successfully submitted the form"
+                    formComps.value.messageType = MessageType.SUCCESS
+
+                    submitTimeout()
+                }).catch((error) => {
+                    formComps.value.message = error["message"]
+                    formComps.value.messageType = MessageType.ERROR
+
+                    submitTimeout()
+                })
+            }else{
+                formComps.value.message = "You have successfully submitted the form"
+                formComps.value.messageType = MessageType.SUCCESS
+            }
+            
+        }
+    }else{
+        formComps.value.message = "Internet connection is not established. Try again later..."
+        formComps.value.messageType = MessageType.ERROR
+
+        submitTimeout()
     }
 
-    clearTimeout(popTimer.value)            //clear any ongoing timer
-    popTimer.value = setTimeout(()=>{       //start a new timer
-        formComps.value.showMessage = false
-    }, (popTime * 1000))
+}
 
+/**
+ * This function is responsible for making sure message boxes are properly displayed or hidden
+ * @param {number} time This determines how long a message should be displayed
+ */
+function submitTimeout(time:number = popTime){
+    clearTimeout(popTimer.value)           //clear any ongoing timer
+
+    if(time != popTime){
+        popTime = time
+    }
+    popTimer.value = setTimeout(()=>{
+        console.log("timer finished")
+        formComps.value.showMessage = false
+
+        //reset pop time
+        popTime = 5
+    }, (popTime * 1000))
 }
 
 /** 
@@ -71,19 +117,21 @@ function checkForm() :boolean{
         formComps.value.message = "Please select your mode of sponsorship"
     }else if(Form.sponsorType == ''){
         formComps.value.message = "Please select your type of sponsorship"
-    }else if(Form.fname == ''){
+    }else if(Form.fname == '' && Form.sponsor == "individual"){
         formComps.value.message = "Firstname field cannot be empty"
-    }else if(Form.lname == ''){
+    }else if(Form.lname == '' && Form.sponsor == "individual"){
         formComps.value.message = "Lastname field cannot be empty"
     }else if(Form.phone == ''){
         formComps.value.message = "Please provide your phone number"
+    }else if(Form.location == '' && Form.sponsor == 'agency'){
+        formComps.value.message = "Please provide city of your agency or business"
     }else if(Form.phone.length < 10 || Form.phone.length > 13){
         formComps.value.message = "Phone number invalid. Please provide a 10 digit number"
     }else if(!checkPhoneNumber(Form.phone)){
         formComps.value.message = "Identified an invalid phone number. Please provide a valid AirtelTigo, MTN or Vodafone number" 
     }else{
         formState = true
-        formComps.value.messageType = MessageType.SUCCESS
+        formComps.value.messageType = MessageType.NEUTRAL
     }
 
     return formState;
