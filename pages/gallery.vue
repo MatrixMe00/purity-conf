@@ -40,7 +40,9 @@
                         class="w-full h-full object-[100% 100%] object-center group-hover:opacity-80" alt="">
                     </div>
 
-                    <div v-if="online" class="col-span-2 sm:col-span-3 lg:col-span-4 flex items-center justify-center">
+                    <div v-if="online" class="col-span-2 sm:col-span-3 lg:col-span-4 flex items-center justify-center"
+                        :class="lastGalleryImage >= getGalleryLength(currentTab) ? 'hidden':''"
+                    >
                         <button class="rounded border hover:bg-sky-600 bg-sky-500 px-12 py-3 text-white" @click="activeGallery = activeGallery.concat(filterImage(currentTab))">Load More</button>
                     </div>
                 </div>
@@ -50,7 +52,7 @@
     </section>
 
     <section class="fixed inset-0 bg-black/80 z-50 flex" v-if="imageModal">
-        <div class="h-mod-scroll p-2 container m-auto mx-2 sm:mx-auto bg-white/30 max-h-[90vh] overflow-auto rounded landscape:md:max-h-[85vh] lg:max-w-screen-md">
+        <div class="p-2 grid container m-auto mx-2 sm:mx-auto bg-white/30 overflow-hidden rounded max-h-[90vh] landscape:md:max-h-[85vh] lg:max-w-screen-md">
             <!-- Modal head -->
             <header class="flex justify-between items-center rounded-t cursor bg-black/60 py-3 px-2">
                 <span class="font-semibold text-white">
@@ -62,7 +64,10 @@
             </header>
 
             <!--Modal image-->
-            <img :src="`${baseImageUrl}${modalImage}`" class="w-full h-full" alt="">
+            <div class="max-h-[90vh] w-full bg-black/50 flex justify-center overflow-auto h-full h-mod-scroll">
+                <img :src="`${baseImageUrl}${modalImage}`" class="h-full" alt="">
+            </div>
+            
             
             <!--Modal foot-->
             <div class="py-5 flex justify-between rounded-b items-center bg-black/60 text-white">
@@ -71,7 +76,7 @@
                 >
                     <i class="fas fa-angle-left"></i>
                 </span>
-                <span class="text-white">{{currentModalImageNumber + 1}} / {{getGalleryLength(currentGalleryContainer)}}</span>
+                <span class="text-white">{{currentModalImageNumber + 1}} / {{getGalleryLength(-1)}}</span>
                 <span class="right cursor-pointer hover:text-stone-500 min-w-[2rem] ml-2 text-center"
                     @click="nextModalImage(currentGalleryContainer)"
                 >
@@ -149,7 +154,7 @@
 
     function prevModalImage(index:number){
         //get total images in the gallery
-        var total = getGalleryLength(index)
+        var total = getGalleryLength(-1)
 
         //check if the modal image number is not below 0
         currentModalImageNumber.value = currentModalImageNumber.value == 0 ? (total-1) : currentModalImageNumber.value - 1
@@ -160,7 +165,7 @@
 
     function nextModalImage(index:number){
         //get total images in the gallery
-        var total = getGalleryLength(index)
+        var total = getGalleryLength(-1)
 
         //check if the modal image number is not above the total images
         currentModalImageNumber.value = currentModalImageNumber.value < (total-1) ? currentModalImageNumber.value + 1 : 0
@@ -170,7 +175,10 @@
     }
 
     function getGalleryLength(index:number){
-        return photos.value[index].gallery.length
+        if(index > -1)
+            return photos.value[index].gallery.length
+        else
+            return activeGallery.value.length
     }
 
     function filterImage(index:number){
@@ -179,7 +187,7 @@
         let first = lastGalleryImage.value
 
         if(length > 8){
-            lastGalleryImage.value += 8
+            lastGalleryImage.value = (lastGalleryImage.value + 8) > length ? length : (lastGalleryImage.value + 8)
             newGallery = photos.value[index].gallery.slice(first, lastGalleryImage.value)
         }else{
             newGallery = photos.value[index].gallery
