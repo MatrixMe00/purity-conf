@@ -11,7 +11,7 @@
                     v-for="(item, index) in photos" :key="index"
                     :class="[currentTab == index ? 'bg-blue-500 hover:bg-blue-500 text-white':'hover:bg-blue-400']"
                     @click="changeTab(index)"
-                >{{item.month}} {{item.year}}</span>
+                >{{item.location}} {{item.year}}</span>
             </div>
         </div>
         <!-- End of tags -->

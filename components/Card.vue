@@ -62,11 +62,13 @@
     <!-- Event cards -->
     <div v-else-if="card==CardType.EVENT" class="max-w-sm md:max-w-md md:hover:rounded-t-xl w-full h-fit relative border shadow hover:shadow-lg group overflow-hidden"
     >
-        <img src="/assets/img/person2.jpg" class="w-full object-cover object-top" alt="">
+        <div class="max-h-72 h-full flex justify-center items-center">
+            <img :src="cardData.imgUrl" class="w-full h-full object-cover object-center block" alt="">
+        </div>        
         <div class="py-3 flex-col justify-end gap-y-2 p-2 bg-black/70 text-neutral-100 absolute 
             inset-0 border-2 translate-x-full flex group-hover:rounded-md group-hover:translate-x-0">
             <span class="text-xs text-neutral-400 font-semibold">{{cardData.otherData?.guest}}</span>
-            <h1 class="block font-semibold text-2xl md:text-3xl">{{cardData.title}}</h1>
+            <h1 class="block font-semibold text-2xl md:text-2xl">{{cardData.title}}</h1>
             <span class="text-sm">{{cardData.content}}</span>
         </div>
         <div class="justify-center absolute top-2 right-2 translate-x-full flex group-hover:translate-x-0">

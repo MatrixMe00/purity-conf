@@ -1,5 +1,5 @@
 <template>
-    <Carousel />
+    <Carousel :carosel="carouselCards" />
     <IndexAbout page="home" />
     <IndexHero />
     <IndexEvents />
@@ -7,7 +7,9 @@
 </template>
 
 <script setup lang="ts">
-    import {FollowMode} from "~/mixins/globalVars"
+    import {FollowMode, caroselSpeed} from "~/mixins/globalVars"
+    import {carouselCards} from "~/composables/carousels"
+
     useHead({
         title: "Purity Conference | Home",
         meta: [

@@ -61,6 +61,14 @@ export interface internetVar{
     message: string
 }
 
+export enum caroselSpeed{
+    VSLOW = 10,
+    SLOW = 7.5,
+    NORMAL = 5,
+    FAST = 3,
+    VFAST = 1.5
+}
+
 /**
  * This function determines if there is an internet connection
  * @param {boolean} addMessage determines if a message should be added

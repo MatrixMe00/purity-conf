@@ -35,7 +35,7 @@
     import {CardType} from "~/mixins/globalVars"
 
     interface fileProp{
-        arrayData: {},
+        arrayData: [],
         title: string,
         noDataMessage?: string
     }
