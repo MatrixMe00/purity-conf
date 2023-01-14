@@ -2,7 +2,7 @@
     <section class="m-4 xl:container xl:mx-auto">
         <div class="lg:mx-12 border shadow-md py-12 px-7 flex flex-col sm:justify-between md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-16">
             <p class="font-semibold text-2xl md:text-4xl">Grab Your Ticket</p>
-            <button class="border py-4 px-3 border-blue-500 hover:bg-blue-500 hover:text-white w-fit text-lg md:text-xl">Get a Ticket</button>
+            <button class="border py-4 px-3 border-blue-500 hover:bg-blue-500 hover:text-white w-fit text-lg md:text-xl" onclick="document.getElementById('ticketButton').click()">Get a Ticket</button>
         </div>
     </section>
 

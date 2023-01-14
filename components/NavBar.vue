@@ -28,7 +28,7 @@
                         <span>{{link.title}}</span>
                     </NuxtLink>
                 </div>
-                <button class="py-2 px-3 border border-white hover:border-blue-500 hover:bg-blue-500 hover:text-white"
+                <button id="ticketButton" class="py-2 px-3 border border-white hover:border-blue-500 hover:bg-blue-500 hover:text-white"
                     :class="[hamClicked ? 'w-full':'']"
                     @click="[hamClicked = false, $emit('open-ticket-modal')]"
                 >Get a ticket</button>

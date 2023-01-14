@@ -1,4 +1,4 @@
-enum TAG{
+export enum TAG{
     COME = "coming",
     LIVE = "live",
     PAST = "past",
@@ -9,7 +9,7 @@ export const event = [
     {
         imgUrl:"assets/img/events/Hohoe-2023.jpg", title:"Purity Conference | Hohoe", content: "Coming March, we will be having Rev. Edem Arku, Rev. Juanita and Rev. Kofi Asante joining us to bring the very first edition of purity conference to Hohoe on the 3rd of March, 2023",
         btnLink: true, linkUrl: "", otherData:{
-            month: "January", year: "2023", day: "17", tag: "", guest: "Rev. Juanita x Rev. Edem"
+            month: "March", year: "2023", day: "3", tag: "", guest: "Rev. Juanita x Rev. Edem"
         }
     },
     {
@@ -55,8 +55,6 @@ function updatedEvents():any {
             item.otherData.tag = TAG.LIVE
         }
     })
-
-    console.log(items)
 
     return items
 }
