@@ -94,38 +94,44 @@ async function createSession(session_id: string){
  * @returns {Promise<any>} Promise resolved
  */
 export async function passItemToDatabase(user:any, reference:string):Promise<any>{
-    var returnData = null
-    
-    try {
-        let form = jsonToFormData(user)
-        form.append("submit","database-entry")
-
-        if(user.type="sponsor"){
+    return await new Promise(async (resolve, reject) => {
+        try {
+            let form = jsonToFormData(user)
             
-        }else if(user.type=""){
 
-        }
-
-        const response = $fetch<ISession>('http://localhost/vue-course/auth.php', {
-        // const response = await $fetch<ISession>('https://purity.shsdesk.com/auth.php', {        
-            method: 'POST',
-            body: form
-        })
-
-        if(response){
-            returnData = JSON.parse(JSON.stringify(response))
-        }else{
-            returnData = {
-                "error": true,
-                "message": "No response found"
+            if(user.page=="sponsor"){
+                
+            }else if(user.page=="ticket"){
+                form.append("submit","database-entry")
             }
-        }
-    } catch (error) {
-        returnData = error;
-    }
 
-    return await new Promise((resolve, reject) => {
-        
+            // const response = await $fetch<ISession>('http://localhost/vue-course/sms/sms.php', {
+            const response = await $fetch<ISession>('https://purity.shsdesk.com/sms/sms.php', {        
+                method: 'POST',
+                body: form
+            })
+
+            if(response){
+               var r
+
+               if(user.page="ticket"){
+                    r = JSON.parse(JSON.stringify(response))
+                    if(r["status"]=="success"){
+                        resolve(true)
+                    }else{
+                        resolve(false)
+                    }
+               }
+            }else{
+                const returnData = {
+                    "error": true,
+                    "message": "No response found"
+                }
+
+                reject(returnData)
+            }
+        } catch (error) {
+            reject(error);
+        }
     })
-    
 }

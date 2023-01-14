@@ -107,7 +107,7 @@ export async function payWithPaystack(formData:any): Promise<any>{
             case "sponsor":
                 cust_amount *= formData.amount
                 break;
-            case "ticekt":
+            case "ticket":
                 cust_amount *= formData.price
         }
         
@@ -135,12 +135,15 @@ export async function payWithPaystack(formData:any): Promise<any>{
                 let resp = passItemToDatabase(formData, response.reference);
                 
                 resp.then((response) => {
-                    final["error"] = false;
-                    final["message"] = "Process complete";
-                })
-                
-    
-                resolve(final)
+                    if(response == true || response == "true"){
+                        final["error"] = false;
+                        final["message"] = "Payment received! An SMS has been sent to your phone";
+                    }else{
+                        final["error"] = false;
+                        final["message"] = "Payment received! SMS would be sent shortly. If there is no SMS after a while, please contact the admin";
+                    }
+                    resolve(final)
+                })        
             },
             onClose:  function(){
                 final["error"] = true;
@@ -153,7 +156,7 @@ export async function payWithPaystack(formData:any): Promise<any>{
             handler.openIframe();
         } catch (error) {
             final["error"] = true;
-            final["message"] = error.toString()
+            final["message"] = error
 
             reject(final)
         }

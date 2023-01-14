@@ -7,7 +7,8 @@ export var form = ref({
     email: '',
     phone: '',
     ticketNumber: 1,
-    price: 20,
+    price: 0,
+    location: '',
     page: 'ticket'
 })
 
@@ -43,13 +44,19 @@ var popTime = 5             //value in seconds used to set the time for a messag
             const makePayment = payWithPaystack(form.value)
 
             makePayment.then((response) => {
-                formVars.value.message = "You have successfully submitted the form"
+                if(response["error"]){
+                    formVars.value.messageType = MessageType.ERROR
+                }else{
+                    formVars.value.messageType = MessageType.SUCCESS
+                }
+                
+                formVars.value.message = response["message"]
                 formVars.value.finalTicket = form.value.ticketNumber
-                formVars.value.messageType = MessageType.SUCCESS
+                
 
-                submitTimeout()
+                submitTimeout(10)
             }).catch((error) => {
-                formVars.value.message = error["message"]
+                formVars.value.message = "Error: " + error["message"]
                 formVars.value.messageType = MessageType.ERROR
 
                 submitTimeout()
@@ -105,9 +112,19 @@ function checkForm() :boolean{
         formVars.value.message = "Identified an invalid phone number. Please provide a valid AirtelTigo, MTN or Vodafone number" 
     }else if(Form.ticketNumber < 1){
         formVars.value.message = "You can buy at least one ticket"
+    }else if(Form.location == ''){
+        formVars.value.message = "Please select a location for the conference you want to attend"
     }else{
         formState = true
         formVars.value.messageType = MessageType.NEUTRAL
+    }
+
+    if(Form.email == ""){
+        form.value.email = "purity.conf@gmail.com"
+    }
+    
+    if(!formState){
+        submitTimeout()
     }
 
     return formState;
