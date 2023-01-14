@@ -12,7 +12,7 @@
                 <h1 class="py-4 text-center text-xl font-semibold">Member Login</h1>
 
                 <!-- Caption message -->
-                <p class="border p-2 mb-4 text-center cursor-pointer bg-gradient-to-r sticky top-4 z-10"
+                <p class="border p-2 mb-4 text-center cursor-pointer bg-gradient-to-r sticky top-4 z-10 text-[0.9rem]"
                 :class="[
                     formVars.messageType == MessageType.NEUTRAL ? 'from-neutral-50 to-gray-50':'',
                     formVars.messageType == MessageType.ERROR ? 'from-red-500 via-rose-600 to-red-500 text-white':'',

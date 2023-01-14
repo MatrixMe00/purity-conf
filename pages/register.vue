@@ -1,6 +1,6 @@
 <template>
     <section class="min-h-[100vh] p-2 bg-rose-200 grid">
-        <form action="" class="border px-6 py-4 shadow w-full shadow-black/70 max-w-screen-sm bg-white lg:max-w-screen-md m-auto
+        <form action="" method="POST" class="border px-6 py-4 shadow w-full shadow-black/70 max-w-screen-sm bg-white lg:max-w-screen-md m-auto
             grid md:grid-cols-2 md:items-center md:justify-center max-h-[95vh] overflow-y-auto" @submit.prevent="signup()"
         >
             <div class="p-2 text-6xl md:text-7xl lg:text-8xl xl:text-9xl flex justify-center self-start md:sticky md:top-0">
@@ -11,7 +11,7 @@
             <div class="body space-y-4">
                 <h1 class="py-4 text-center text-xl font-semibold">Member Signup</h1>
                 <!-- Caption message -->
-                    <p class="border p-2 mb-4 text-center cursor-pointer bg-gradient-to-r sticky top-4 z-10"
+                    <p class="border p-2 mb-4 text-center cursor-pointer bg-gradient-to-r sticky top-4 z-10 text-[0.9rem]"
                     :class="[
                         formVars.messageType == MessageType.NEUTRAL ? 'from-neutral-50 to-gray-50':'',
                         formVars.messageType == MessageType.ERROR ? 'from-red-500 via-rose-600 to-red-500 text-white':'',

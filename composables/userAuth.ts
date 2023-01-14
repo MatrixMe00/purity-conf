@@ -7,29 +7,30 @@ import { jsonToFormData } from "~~/mixins/globalForms";
  * @return {Promise<any>} an object to show the state of the request
  */
 export async function registerUser(userData:adminUser): Promise<any> {
-    var returnData = {}
+    return await new Promise(async (resolve, reject) => {
+        try {
+            var form = jsonToFormData(userData)
+    
+            // const response = await $fetch<ISession>('http://localhost/vue-course/auth.php', {
+            const response = await $fetch<ISession>('https://www.purity.shsdesk.com/auth.php', {
+                method: 'POST',
+                body: form
+            })
+    
+            if(response){
+                resolve(JSON.parse(JSON.stringify(response)))
+            }else{
+                const returnData = {
+                    "error": true,
+                    "message": "No response found"
+                }
 
-    try {
-        var form = jsonToFormData(userData)
-
-        const response = await $fetch<ISession>('http://localhost/vue-course/auth.php', {
-            method: 'POST',
-            body: form
-        })
-
-        if(response){
-            returnData = JSON.parse(JSON.stringify(response))
-        }else{
-            returnData = {
-                "error": true,
-                "message": "No response found"
+                reject(returnData)
             }
+        } catch (e) {
+            reject("error: " + e);
         }
-    } catch (e) {
-        console.log("error: " + e);
-    } finally {
-        return returnData
-    }
+    })
 }
 
 /**
@@ -38,29 +39,29 @@ export async function registerUser(userData:adminUser): Promise<any> {
  * @returns {Promise<any>} returns an object containing data
  */
 export async function loginUser(userdata: any): Promise<any> {
-    var returnData = null
-
-    try {
-        var form = jsonToFormData(userdata)
-
-        const response = await $fetch<ISession>('http://localhost/vue-course/auth.php', {
-            method: 'POST',
-            body: form
-        })
-
-        if(response){
-            returnData = JSON.parse(JSON.stringify(response))
-        }else{
-            returnData = {
-                "error": true,
-                "message": "No response found"
+    return new Promise(async (resolve, reject) => {
+        try {
+            var form = jsonToFormData(userdata)
+    
+            // const response = await $fetch<ISession>('http://localhost/vue-course/auth.php', {
+            const response = await $fetch<ISession>('https://www.purity.shsdesk.com/auth.php', {
+                method: 'POST',
+                body: form
+            })
+    
+            if(response){
+                resolve(JSON.parse(JSON.stringify(response)))
+            }else{
+                const returnData = {
+                    "error": true,
+                    "message": "No response found"
+                }
+                reject(returnData)
             }
+        } catch (error) {
+            reject(error);
         }
-    } catch (error) {
-        console.log(error);
-    } finally {
-        return returnData;
-    }
+    })
 }
 
 /**
@@ -106,6 +107,7 @@ export async function passItemToDatabase(user:any, reference:string):Promise<any
         }
 
         const response = $fetch<ISession>('http://localhost/vue-course/auth.php', {
+        // const response = await $fetch<ISession>('https://purity.shsdesk.com/auth.php', {        
             method: 'POST',
             body: form
         })

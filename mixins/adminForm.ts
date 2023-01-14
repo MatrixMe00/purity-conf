@@ -24,7 +24,7 @@ newUser.value.gender = userGender.NONE
 
 //message box timer variables
 let messageTimer:ReturnType<typeof setTimeout>
-let time = 5000
+let time = 5
 
 /**
  * This function is used to signup a user
@@ -32,10 +32,8 @@ let time = 5000
 export function signup(){
     //enable the message box
     formVars.value.showMessage = true
-
-    //clear time interval if any
-    clearInterval(messageTimer)
-
+    formVars.value.message = "Creating Account..."
+    
     //check if all data is presented
     if(checkSignup()){
         //submit = signup
@@ -50,23 +48,34 @@ export function signup(){
                 formVars.value.message = result["message"]
                 formVars.value.messageType = MessageType.ERROR
             }else{
-                // formVars.value.message = "Your account has been created"
                 formVars.value.message = result["message"]
                 formVars.value.messageType = MessageType.SUCCESS
             }
+
+            console.log(result)
+            messageTimeout()
         }).catch(function(e){
             console.log(e.toString)
+
+            messageTimeout()
         })
     }else{
         formVars.value.messageType = MessageType.ERROR
     }
+}
 
-    //remove message from screen
+/**
+ * This function is used to display the message for some time
+ * @param {number} timer This holds the amount of time to take in seconds
+ */
+function messageTimeout(timer: number = time){
+    clearTimeout(messageTimer);
+
     messageTimer = setTimeout(() => {
         formVars.value = {
             showMessage: false, message: "", messageType: MessageType.NEUTRAL
         }
-    }, time)
+    }, (timer * 1000))
 }
 
 /**
@@ -104,7 +113,7 @@ function checkSignup(){
  * Function to check if details for login are present
  * @return {boolean} true if details are present
  */
-export function checkLogin(){
+export function checkLogin(): boolean{
     const userdata = form.value
     let returnValue = false
 
@@ -124,7 +133,10 @@ export function checkLogin(){
  */
 export function login(){
     //enable the message box
+    formVars.value.message = "Logging in..."
+    formVars.value.messageType = MessageType.NEUTRAL
     formVars.value.showMessage = true
+    
 
     //clear time interval if any
     clearInterval(messageTimer)
@@ -149,17 +161,14 @@ export function login(){
                     useRouter().push('/admin/dashboard')
                 },3000)
             }
+
+            messageTimeout()
         }).catch(function(e){
             console.log(e.toString());
+
+            messageTimeout()
         })
     }else{
         formVars.value.messageType = MessageType.ERROR
     }
-
-    //remove message from screen
-    messageTimer = setTimeout(() => {
-        formVars.value = {
-            showMessage: false, message: "", messageType: MessageType.NEUTRAL
-        }
-    }, time)
 }
