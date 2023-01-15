@@ -97,6 +97,11 @@ export async function payWithPaystack(formData:any): Promise<any>{
         let cust_amount = 100;
         let cust_name = ""
 
+        //prevent no email error
+        if(formData.email == ""){
+            formData.email = "purity.conf@gmail.com"
+        }
+
         if(formData.fname != "" && formData.lname != ""){
             cust_name = formData.fname + " " + formData.lname
         }else if(formData.agency != ""){
@@ -113,44 +118,44 @@ export async function payWithPaystack(formData:any): Promise<any>{
         
         try {
             var handler = PaystackPop.setup({
-            key: mykey,
-            email: formData.email,
-            amount: cust_amount,
-            currency: "GHS",
-            metadata: {
-                custom_fields: [
-                    {
-                        display_name: "Mobile Number",
-                        variable_name: "mobile_number",
-                        value: formData.phone
-                    },
-                    {
-                        display_name: "Customer's Name",
-                        variable_name: "customer_name",
-                        value: cust_name
-                    }
-                ]
-            },
-            callback: function(response:any){//parse data into database
-                let resp = passItemToDatabase(formData, response.reference);
-                
-                resp.then((response) => {
-                    if(response == true || response == "true"){
-                        final["error"] = false;
-                        final["message"] = "Payment received! An SMS has been sent to your phone";
-                    }else{
-                        final["error"] = false;
-                        final["message"] = "Payment received! SMS would be sent shortly. If there is no SMS after a while, please contact the admin";
-                    }
-                    resolve(final)
-                })        
-            },
-            onClose:  function(){
-                final["error"] = true;
-                final["message"] = "Transaction has been canceled by user";
+                key: mykey,
+                email: formData.email,
+                amount: cust_amount,
+                currency: "GHS",
+                metadata: {
+                    custom_fields: [
+                        {
+                            display_name: "Mobile Number",
+                            variable_name: "mobile_number",
+                            value: formData.phone
+                        },
+                        {
+                            display_name: "Customer's Name",
+                            variable_name: "customer_name",
+                            value: cust_name
+                        }
+                    ]
+                },
+                callback: function(response:any){//parse data into database
+                    let resp = passItemToDatabase(formData, response.reference);
+                    
+                    resp.then((response) => {
+                        if(response == true || response == "true"){
+                            final["error"] = false;
+                            final["message"] = "Payment received! An SMS has been sent to your phone";
+                        }else{
+                            final["error"] = false;
+                            final["message"] = "Payment received! SMS would be sent shortly. If there is no SMS after a while, please contact the admin";
+                        }
+                        resolve(final)
+                    })        
+                },
+                onClose:  function(){
+                    final["error"] = true;
+                    final["message"] = "Transaction has been canceled by user";
 
-                reject(final)
-            }
+                    reject(final)
+                }
             });
             
             handler.openIframe();

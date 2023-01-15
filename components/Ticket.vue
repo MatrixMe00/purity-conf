@@ -108,7 +108,7 @@
                         id="ticket" :value="totalPrice" name="ticket" readonly type="text"
                     >
                     </div>
-                    <div class="flex flex-col md:flex-row col-span-2 pt-2 border-t-2 md:border-t-0 mt-4">
+                    <div class="flex flex-col md:flex-row md:col-span-2 lg:col-span-3 pt-2 border-t-2 md:border-t-0 mt-4">
                         <button class="text-center md:w-36 bg-blue-600 hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600 text-white hover:shadow-md m-2 border p-2 cursor-pointer" type="submit">Make Payment</button>
                         <button class="text-center md:w-36 bg-rose-600 hover:bg-gradient-to-r hover:from-rose-600 hover:to-red-600 text-white hover:shadow-md m-2 border p-2 cursor-pointer"
                             @click="[$emit('close-ticket-modal'), resetForm()]"

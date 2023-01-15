@@ -39,7 +39,7 @@ var popTime = 5             //value in seconds used to set the time for a messag
     if(detectInternet()){
         if(checkForm()){
             //alert user that payment is ongoing
-            formVars.value.message = "Payment Ongoing, please wait..."
+            formVars.value.message = "Payment and SMS Ongoing, please wait..."
 
             const makePayment = payWithPaystack(form.value)
 
@@ -52,11 +52,10 @@ var popTime = 5             //value in seconds used to set the time for a messag
                 
                 formVars.value.message = response["message"]
                 formVars.value.finalTicket = form.value.ticketNumber
-                
 
                 submitTimeout(10)
             }).catch((error) => {
-                formVars.value.message = "Error: " + error["message"]
+                formVars.value.message = error["message"]
                 formVars.value.messageType = MessageType.ERROR
 
                 submitTimeout()
@@ -82,7 +81,6 @@ function submitTimeout(time:number = popTime){
         popTime = time
     }
     popTimer.value = setTimeout(()=>{
-        console.log("timer finished")
         formVars.value.showMessage = false
 
         //reset pop time
@@ -117,10 +115,6 @@ function checkForm() :boolean{
     }else{
         formState = true
         formVars.value.messageType = MessageType.NEUTRAL
-    }
-
-    if(Form.email == ""){
-        form.value.email = "purity.conf@gmail.com"
     }
     
     if(!formState){

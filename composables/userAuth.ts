@@ -98,7 +98,6 @@ export async function passItemToDatabase(user:any, reference:string):Promise<any
         try {
             let form = jsonToFormData(user)
             
-
             if(user.page=="sponsor"){
                 
             }else if(user.page=="ticket"){
