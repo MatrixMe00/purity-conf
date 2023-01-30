@@ -26,11 +26,12 @@
     </div>
 
     <!-- Hero Cards -->
-    <div v-else-if="card==CardType.HERO" class="heroCard max-w-sm md:max-w-md hover:border-zinc-500 md:hover:rounded-t-xl w-full h-fit m-4 
-        lg:m-6 rounded-t-2xl rounded-b relative p-2 border"
+    <div v-else-if="card==CardType.HERO" class="heroCard max-w-sm md:max-w-md hover:border-zinc-500 md:hover:rounded-t-xl w-full h-fit 
+        rounded-t-2xl rounded-b relative p-2 border"
         :class="[cardData.social ? 'group':'']"
     >
-        <img src="/assets/img/person2.jpg" class="w-full rounded-t-xl object-cover object-top" alt="">
+        <img v-if="cardData.imgUrl" :src="cardData.imgUrl" class="w-full h-72 rounded-t-xl object-cover" alt="">
+        <img v-else src="/assets/img/person2.jpg" class="w-full rounded-t-xl object-cover object-top" alt="">
         <h1 class="text-center pt-5 pb-3 text-xl bg-white">
             <span class="block font-semibold">{{cardData.title}}</span>
             <span class="text-sm">({{cardData.content}})</span>
@@ -38,22 +39,22 @@
         <div v-if="cardData.social" class="flex justify-center items-center space-x-2 
             invisible text-xl group-hover:visible p-2"
         >
-            <a href="" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.facebook" title="Facebook">
+            <a :href="cardData.socialLinks?.facebook" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.facebook" title="Facebook">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.twitter" title="Twitter">
+            <a :href="cardData.socialLinks?.twitter" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.twitter" title="Twitter">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.telegram" title="Telegram">
+            <a :href="cardData.socialLinks?.telegram" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.telegram" title="Telegram">
                 <i class="fab fa-telegram"></i>
             </a>
-            <a href="" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.whatsapp" title="WhatsApp">
+            <a :href="cardData.socialLinks?.whatsapp" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.whatsapp" title="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
-            <a href="" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.instagram" title="Instagram">
+            <a :href="cardData.socialLinks?.instagram" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.instagram" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.phone" title="Phone">
+            <a :href="(`tel:` + cardData.socialLinks?.phone)" :title="cardData.socialLinks?.phone.replace('233','0')" class="p-1 hover:shadow-md" v-if="cardData.socialLinks?.phone">
                 <i class="fas fa-phone"></i>
             </a>
         </div>
