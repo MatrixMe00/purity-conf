@@ -30,7 +30,8 @@
         lg:m-6 rounded-t-2xl rounded-b relative p-2 border"
         :class="[cardData.social ? 'group':'']"
     >
-        <img src="/assets/img/person2.jpg" class="w-full rounded-t-xl object-cover object-top" alt="">
+        <img v-if="cardData.imgUrl" :src="cardData.imgUrl" class="w-full h-72 rounded-t-xl object-cover" alt="">
+        <img v-else src="/assets/img/person2.jpg" class="w-full rounded-t-xl object-cover object-top" alt="">
         <h1 class="text-center pt-5 pb-3 text-xl bg-white">
             <span class="block font-semibold">{{cardData.title}}</span>
             <span class="text-sm">({{cardData.content}})</span>

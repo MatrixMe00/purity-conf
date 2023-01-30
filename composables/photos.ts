@@ -129,6 +129,13 @@ export const gallery = [
     }
 ]
 
+export const guests = [
+    {title: "Rev. Juanita Antwiwaa", content: "Purity Conference 2022, Ho", imgUrl: "https://images2.imgbox.com/bf/3f/YwB3B24X_o.jpg"},
+    {title: "Ms. Achiaa", content: "Purity Conference 2022, Ho", imgUrl: "https://images2.imgbox.com/f6/15/nYTAhn7X_o.jpg"},
+    {title: "Ld. Rev. Charlotte Oduro", content: "Purity Conference 2022, Ada", imgUrl: "https://images2.imgbox.com/37/7a/R3w2kQEx_o.jpg"},
+    {title: "Rev. Edem Arku", content: "Purity Conference 2022, Ho", imgUrl: "https://images2.imgbox.com/0a/38/5stPxtOv_o.jpg"},
+]
+
 //demo of new gallery item
 // {
 //     title: "", year: number, month: "", location: "",
