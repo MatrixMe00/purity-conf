@@ -1,17 +1,17 @@
 <template>
-    <section class="xl:container xl:m-auto">
+    <section class="container mx-auto">
         <!--Banner and about brief-->
         <Banner 
-            title="ABOUT US" :banner-content="abtDesc" content-banner="true"
+            title="ABOUT US" :html-content="abtDesc" content-banner="true" :html-class="`max-w-screen-lg`"
         />
 
         <!--About the founder-->
         <IndexAbout page="about" />
 
         <!--The team behind the production-->
-        <div class="team py-12 px-8">
-            <h1 class="text-center font-bold capitalize text-3xl mb-8">Team Members</h1>
-            <div class="grid justify-center content-center gap-2 md:gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div class="team py-12 px-8 mx-2 flex flex-col items-center justify-center">
+            <h1 class="text-center font-bold capitalize text-3xl mb-8">Team Members [{{team.length}}]</h1>
+            <div class="grid justify-center content-center gap-2 md:gap-3 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
                 <Card v-for="(member, index) in team"
                     :key="index"
                     :card-data="member"
@@ -35,30 +35,103 @@
 
     const team = ref([
         {
-            title: "Team Member", content: "Team Role",
+            title: "Rev. Kofi Asante", content: "Founder",
             social: true, socialLinks: {
-                facebook: "fblink", whatsapp: "walink", phone: "279284896"
+                facebook: "fblink", whatsapp: "https://wa.me/233245402938", phone: "233245402938"
             }
         },
         {
-            title: "Team Member", content: "Team Role",
+            title: "Mr. Emmanuel", content: "Team Head",
             social: true, socialLinks: {
-                facebook: "fblink", whatsapp: "walink", phone: "279284896", telegram: "tele"
+                facebook: "fblink", whatsapp: "https://wa.me/233551463006", phone: "233551463006", telegram: "tele"
             }
         },
         {
-            title: "Team Member", content: "Team Role",
+            title: "Promise Gbolomor", content: "Ast. Team Head",
             social: true, socialLinks: {
-                facebook: "fblink", whatsapp: "walink", phone: "279284896", twitter: "twit"
+                facebook: "fblink", whatsapp: "https://wa.me/233501096486", phone: "233501096486", twitter: "twit"
             }
         },
         {
-            title: "Team Member", content: "Team Role",
+            title: "Mad. Abigail", content: "General Secretary",
             social: true, socialLinks: {
-                facebook: "fblink", whatsapp: "walink", phone: "279284896"
+                facebook: "fblink", whatsapp: "https://wa.me/233243587385", phone: "233243587385"
+            }
+        },
+        {
+            title: "Michael Arko", content: "Financial Officer",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233275737016", phone: "233275737016"
+            }
+        },
+        {
+            title: "Joseph Amaning", content: "Ticketing Head",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233552251089", phone: "233552251089"
+            }
+        },
+        {
+            title: "Seth Afosah", content: "Ticketing",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233279284896", phone: "233279284896"
+            }
+        },
+        {
+            title: "Prosper Boateng", content: "Media Head",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233272824224", phone: "233272824224"
+            }
+        },
+        {
+            title: "Kelvin Aidoo", content: "Publicity Head",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233509530889", phone: "233509530889"
+            }
+        },
+        {
+            title: "Elizabeth Adzo Mensah", content: "Publicity",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233558379397", phone: "233558379397"
+            }
+        },
+        {
+            title: "Abigail Sewu", content: "Publicity",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233543085962", phone: "233543085962"
+            }
+        },
+        {
+            title: "Maxwell Boateng", content: "Publicity",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233507323622", phone: "233507323622"
+            }
+        },
+        {
+            title: "Roland Osei-Bonsu", content: "Publicity",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233242797593", phone: "233242797593"
+            }
+        },
+        {
+            title: "Emmanuel K", content: "Usher Head 1",
+            social: true, socialLinks: {
+                facebook: "fblink", phone: "233548710858"
+            }
+        },
+        {
+            title: "Isabella Anthony", content: "Usher Head 2",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233549184183", phone: "233549184183"
+            }
+        },
+        {
+            title: "Godswill Batse", content: "Usher",
+            social: true, socialLinks: {
+                facebook: "fblink", whatsapp: "https://wa.me/233551307669", phone: "233551307669"
             }
         }
     ])
 
-    const abtDesc = "Some text about us. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas iste sed officia repellendus ex?"
+    const abtDesc = "Purity Conference is a conference organized, especially for the youth, to preach and impart purity into the generation. The aim of our conferences is to impart each individual with the desire to remain pure for the Christ."
+                    + "<br>Though it might not look it, but there is so much the future suffers if the current generation is not cautioned on the relevance of being pure."
 </script>
