@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/shsdeskc/repositories/purity-conf # Set the deployment path to the appropriate directory on your cPanel server
+    - /bin/cp -R * $DEPLOYPATH/ # Copy all files to the deployment path
+    - /bin/rm -rf $DEPLOYPATH/.nuxt/ # Remove the .nuxt directory from the deployment path
+    - /bin/mkdir $DEPLOYPATH/.nuxt/ # Recreate the .nuxt directory
